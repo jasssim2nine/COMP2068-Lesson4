@@ -10,35 +10,36 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var StartScene = /** @class */ (function (_super) {
-        __extends(StartScene, _super);
+    var OverScene = /** @class */ (function (_super) {
+        __extends(OverScene, _super);
         // Public Properties
         //Constructor
-        function StartScene(assetManager) {
+        function OverScene(assetManager) {
             var _this = _super.call(this, assetManager) || this;
             _this.Start();
             return _this;
         }
         //Private Methods
-        StartScene.prototype._startButtonClick = function () {
+        OverScene.prototype._backButtonClick = function () {
             objects.Game.currentScene = config.Scene.PLAY;
         };
         //Public Methods
         //Initialize game variables and objects
-        StartScene.prototype.Start = function () {
-            this._welcomeLabel = new objects.Label("Welcome", "60px", "consolas", "#000000", 320, 360, true);
-            this._startButton = new objects.Button(this.assetManager, "startButton", 320, 240);
+        OverScene.prototype.Start = function () {
+            this._overLabel = new objects.Label("Game Over", "45px", "consolas", "#000000", 320, 240, true);
+            this._backButton = new objects.Button(this.assetManager, "backButton", 320, 400);
             this.Main();
         };
-        StartScene.prototype.Update = function () {
+        OverScene.prototype.Update = function () {
         };
-        StartScene.prototype.Main = function () {
-            this.addChild(this._welcomeLabel); //add welcome label to the scene
-            this.addChild(this._startButton);
-            this._startButton.on("click", this._startButtonClick);
+        OverScene.prototype.Main = function () {
+            this.addChild(this._overLabel); //add play label to the scene
+            this.addChild(this._backButton); //add back button
+            //click events for next button and back button 
+            this._backButton.on("click", this._backButtonClick);
         };
-        return StartScene;
+        return OverScene;
     }(objects.Scene));
-    scenes.StartScene = StartScene;
+    scenes.OverScene = OverScene;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=start.js.map
+//# sourceMappingURL=over.js.map

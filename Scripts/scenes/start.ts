@@ -1,45 +1,45 @@
 module scenes {
-    export class StartScene extends objects.Scene{
+    export class StartScene extends objects.Scene {
         // Private Instance Variables
-            private _welcomeLabel : objects.Label;
-            private _startButton : objects.Button;
+        private _welcomeLabel: objects.Label;
+        private _startButton: objects.Button;
 
         // Public Properties
 
 
         //Constructor
-        constructor(assetManager:createjs.LoadQueue){
+        constructor(assetManager: createjs.LoadQueue) {
             super(assetManager)
             this.Start();
         }
 
 
         //Private Methods
-            private _startButtonClick():void{
-                
-                objects.Game.currentScene = config.Scene.PLAY;
-            }
+        private _startButtonClick(): void {
+
+            objects.Game.currentScene = config.Scene.PLAY;
+        }
 
         //Public Methods
 
         //Initialize game variables and objects
-        public Start():void{
-            this._welcomeLabel = new objects.Label("Welcome","60px","consolas","#000000",320,360,true);
-            this._startButton = new objects.Button(this.assetManager,"startButton",320,240);
+        public Start(): void {
+            this._welcomeLabel = new objects.Label("Welcome", "60px", "consolas", "#000000", 320, 360, true);
+            this._startButton = new objects.Button(this.assetManager, "startButton", 320, 240);
             this.Main();
 
         }
 
-        public Update(): number{
-            
-            return objects.Game.currentScene;
+        public Update() {
+
+
 
         }
-        public Main():void{
-        this.addChild(this._welcomeLabel);//add welcome label to the scene
-        this.addChild(this._startButton);
+        public Main(): void {
+            this.addChild(this._welcomeLabel);//add welcome label to the scene
+            this.addChild(this._startButton);
 
-        this._startButton.on("click",this._startButtonClick);
+            this._startButton.on("click", this._startButtonClick);
         }
 
 

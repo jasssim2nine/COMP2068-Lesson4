@@ -9,9 +9,12 @@
     var assetManager;
     var assetManifest;
     var currentScene;
+    var currentState;
     assetManifest = [
         { id: "clickMeButton", src: "./Assets/images/click_here_button.png" },
-        { id: "startButton", src: "./Assets/images/startButton.png" }
+        { id: "startButton", src: "./Assets/images/startButton.png" },
+        { id: "nextButton", src: "./Assets/images/nextButton.png" },
+        { id: "backButton", src: "./Assets/images/backButton.png" },
     ];
     //preloads assets
     function Init() {
@@ -28,31 +31,35 @@
         createjs.Ticker.framerate = 60; //60 FPS
         createjs.Ticker.on("tick", Update);
         objects.Game.currentScene = config.Scene.START;
+        currentState = config.Scene.START;
         Main();
     }
     function Update() {
         //if the scene that is playing returns another scene 
         //then call main again
-        if (currentScene.Update() != objects.Game.currentScene) {
-            console.log(objects.Game.currentScene);
+        if (currentState != objects.Game.currentScene) {
             Main();
         }
+        currentScene.Update();
         stage.update();
     }
     function Main() {
+        stage.removeAllChildren();
         switch (objects.Game.currentScene) {
             case config.Scene.START:
-                stage.removeAllChildren();
                 currentScene = new scenes.StartScene(assetManager);
-                stage.addChild(currentScene);
                 break;
             case config.Scene.PLAY:
                 //game play
+                currentScene = new scenes.PlayScene(assetManager);
                 break;
             case config.Scene.OVER:
                 //game over scene
+                currentScene = new scenes.OverScene(assetManager);
                 break;
         }
+        currentState = objects.Game.currentScene;
+        stage.addChild(currentScene);
     }
     window.onload = Init;
 })();
