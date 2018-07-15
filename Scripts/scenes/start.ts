@@ -24,8 +24,9 @@ module scenes {
 
         //Initialize game variables and objects
         public Start():void{
-            this._welcomeLabel = new objects.Label("Welcome","60px","consolas","#000000",320,340,true);
-            this._startButton = new objects.Button(this.assetManager,"startButton",320,300);
+            this._welcomeLabel = new objects.Label("Welcome","60px","consolas","#000000",320,360,true);
+            this._startButton = new objects.Button(this.assetManager,"startButton",320,240);
+            this.Main();
 
         }
 
